@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
   try {
     const form = await req.formData();
     const kind = String(form.get("kind") || "");
-    const message = String(form.get("message") || "").trim().slice(0, 600);
+    const message = String(form.get("message") || "").trim().slice(0, 2500);
     const author = String(form.get("author") || "").trim().slice(0, 40);
     const isAnon = String(form.get("is_anon") || "false") === "true";
     const colorRaw = String(form.get("color") || "bubble");

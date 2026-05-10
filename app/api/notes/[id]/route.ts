@@ -34,7 +34,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     const patch: Record<string, any> = {};
 
     if (typeof body.message === "string") {
-      patch.message = body.message.trim().slice(0, 600) || null;
+      patch.message = body.message.trim().slice(0, 2500) || null;
     }
     if (typeof body.author === "string") {
       patch.author = body.author.trim().slice(0, 40) || null;

@@ -241,7 +241,7 @@ export function AddNoteDialog({
                       ref={textareaRef}
                       className="field mt-2 font-body text-lg leading-relaxed"
                       placeholder="dear mimiru, may your stream stay enchanted forever..."
-                      maxLength={600}
+                      maxLength={2500}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       style={{
@@ -260,7 +260,7 @@ export function AddNoteDialog({
                           </button>
                         ))}
                       </div>
-                      <span className="pixel-label opacity-70">{message.length}/600</span>
+                      <span className="pixel-label opacity-70">{message.length}/2500</span>
                     </div>
 
                     <div className="mt-4">
