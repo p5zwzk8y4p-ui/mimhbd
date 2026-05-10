@@ -234,60 +234,12 @@ export function AddNoteDialog({
               )}
 
               <form onSubmit={submit} className="mt-6 space-y-5">
-                {(isEdit ? lockedKind === "digital" : tab === "digital") ? (
-                  <div>
-                    <label className="pixel-label">your wish</label>
-                    <textarea
-                      ref={textareaRef}
-                      className="field mt-2 font-body text-lg leading-relaxed"
-                      placeholder="dear mimiru, may your stream stay enchanted forever..."
-                      maxLength={2500}
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      style={{
-                        background: COLOR_TOKENS[color].bg + "cc",
-                        color: COLOR_TOKENS[color].ink
-                      }}
-                    />
-                    <div className="flex justify-between items-center mt-2">
-                      <div className="flex flex-wrap gap-1.5">
-                        {EMOJI_QUICK.map((e) => (
-                          <button
-                            key={e} type="button" onClick={() => insertEmoji(e)}
-                            className="w-8 h-8 rounded-full bg-white/70 hover:bg-white border border-white/80 transition text-base"
-                          >
-                            {e}
-                          </button>
-                        ))}
-                      </div>
-                      <span className="pixel-label opacity-70">{message.length}/2500</span>
-                    </div>
-
-                    <div className="mt-4">
-                      <div className="pixel-label mb-2">card color</div>
-                      <div className="flex flex-wrap gap-2.5">
-                        {NOTE_COLORS.map((nc) => (
-                          <button
-                            key={nc} type="button" onClick={() => setColor(nc)}
-                            aria-label={nc}
-                            className="w-9 h-9 rounded-full transition border-2"
-                            style={{
-                              background: COLOR_TOKENS[nc].bg,
-                              borderColor: color === nc ? COLOR_TOKENS[nc].tape : "rgba(255,255,255,0.7)",
-                              boxShadow: color === nc ? `0 0 0 3px ${COLOR_TOKENS[nc].tape}55, 0 6px 14px -8px ${COLOR_TOKENS[nc].tape}` : "0 4px 10px -6px rgba(58,31,77,0.3)",
-                              transform: color === nc ? "scale(1.08)" : "scale(1)"
-                            }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ) : (
+                {(isEdit ? lockedKind === "image" : tab === "image") && (
                   <div>
                     {isEdit ? (
                       editing?.image_url ? (
-                        <div>
-                          <label className="pixel-label">attached doodle (cannot be changed)</label>
+                        <>
+                          <span className="pixel-label">attached doodle (cannot be changed)</span>
                           <div className="mt-2 rounded-2xl border border-white/70 bg-white/70 p-3">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img src={editing.image_url} alt="current attachment" className="rounded-xl max-h-72 mx-auto" />
@@ -295,7 +247,7 @@ export function AddNoteDialog({
                           <p className="pixel-label opacity-70 mt-2">
                             to swap the image, delete this note and create a new one ✦
                           </p>
-                        </div>
+                        </>
                       ) : null
                     ) : (
                       <>
@@ -329,17 +281,62 @@ export function AddNoteDialog({
                         </button>
                       </>
                     )}
-
-                    <label className="pixel-label mt-5 block">caption (optional)</label>
-                    <input
-                      type="text" maxLength={560}
-                      placeholder="a tiny note to go with it ✦"
-                      className="field mt-2 font-body text-base"
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                    />
                   </div>
                 )}
+
+                <div>
+                  <label className="pixel-label">
+                    {(isEdit ? lockedKind === "image" : tab === "image") ? "your message (optional)" : "your wish"}
+                  </label>
+                  <textarea
+                    ref={textareaRef}
+                    className="field mt-2 font-body text-lg leading-relaxed"
+                    placeholder={
+                      (isEdit ? lockedKind === "image" : tab === "image")
+                        ? "say a few words about your doodle, or just hit send ✦"
+                        : "dear mimiru, may your stream stay enchanted forever..."
+                    }
+                    maxLength={2500}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    style={{
+                      background: COLOR_TOKENS[color].bg + "cc",
+                      color: COLOR_TOKENS[color].ink
+                    }}
+                  />
+                  <div className="flex justify-between items-center mt-2">
+                    <div className="flex flex-wrap gap-1.5">
+                      {EMOJI_QUICK.map((e) => (
+                        <button
+                          key={e} type="button" onClick={() => insertEmoji(e)}
+                          className="w-8 h-8 rounded-full bg-white/70 hover:bg-white border border-white/80 transition text-base"
+                        >
+                          {e}
+                        </button>
+                      ))}
+                    </div>
+                    <span className="pixel-label opacity-70">{message.length}/2500</span>
+                  </div>
+
+                  <div className="mt-4">
+                    <div className="pixel-label mb-2">card color</div>
+                    <div className="flex flex-wrap gap-2.5">
+                      {NOTE_COLORS.map((nc) => (
+                        <button
+                          key={nc} type="button" onClick={() => setColor(nc)}
+                          aria-label={nc}
+                          className="w-9 h-9 rounded-full transition border-2"
+                          style={{
+                            background: COLOR_TOKENS[nc].bg,
+                            borderColor: color === nc ? COLOR_TOKENS[nc].tape : "rgba(255,255,255,0.7)",
+                            boxShadow: color === nc ? `0 0 0 3px ${COLOR_TOKENS[nc].tape}55, 0 6px 14px -8px ${COLOR_TOKENS[nc].tape}` : "0 4px 10px -6px rgba(58,31,77,0.3)",
+                            transform: color === nc ? "scale(1.08)" : "scale(1)"
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
 
                 {/* Author */}
                 <div className="grid sm:grid-cols-[1fr_auto] gap-3 items-end">
