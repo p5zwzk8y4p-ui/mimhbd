@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { COLOR_TOKENS, type Note } from "@/lib/types";
 import { HeartDoodle, Sparkle, Star4 } from "./Decorations";
 import { forget, getToken } from "@/lib/ownership";
@@ -44,29 +44,22 @@ export function ViewNoteDialog({
     };
   }, [open, onClose]);
 
+  if (!open || !note) return null;
   return (
-    <AnimatePresence>
-      {open && note && (
-        <motion.div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.18 } }}
-          style={{ pointerEvents: open ? "auto" : "none" }}
-        >
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 backdrop-blur-md"
-            style={{ background: "linear-gradient(180deg, rgba(58,31,77,0.45), rgba(58,31,77,0.7))" }}
-            onClick={onClose}
-          />
+    <motion.div
+      className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-8"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="absolute inset-0 backdrop-blur-md"
+        style={{ background: "linear-gradient(180deg, rgba(58,31,77,0.45), rgba(58,31,77,0.7))" }}
+        onClick={onClose}
+      />
 
-          <ViewCard note={note} onClose={onClose} onEdit={onEdit} onDeleted={onDeleted} />
-        </motion.div>
-      )}
-    </AnimatePresence>
+      <ViewCard note={note} onClose={onClose} onEdit={onEdit} onDeleted={onDeleted} /></motion.div>
   );
 }
 

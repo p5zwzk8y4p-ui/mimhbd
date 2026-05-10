@@ -158,14 +158,12 @@ export function AddNoteDialog({
     }
   }
 
+  if (!open) return null;
   return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-3 sm:p-6"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.18 } }}
-          style={{ pointerEvents: open ? "auto" : "none" }}
-        >
+    <motion.div
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-3 sm:p-6"
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+    >
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="absolute inset-0 backdrop-blur-md"
@@ -404,8 +402,6 @@ export function AddNoteDialog({
               </AnimatePresence>
             </div>
           </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    </motion.div>
   );
 }
