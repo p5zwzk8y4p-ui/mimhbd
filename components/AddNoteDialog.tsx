@@ -332,7 +332,7 @@ export function AddNoteDialog({
 
                     <label className="pixel-label mt-5 block">caption (optional)</label>
                     <input
-                      type="text" maxLength={140}
+                      type="text" maxLength={560}
                       placeholder="a tiny note to go with it ✦"
                       className="field mt-2 font-body text-base"
                       value={message}
