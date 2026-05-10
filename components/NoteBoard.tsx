@@ -58,7 +58,7 @@ export function NoteBoard({
             </div>
           </motion.div>
         ) : (
-          <div className="masonry">
+          <div className="grid gap-6 sm:gap-7 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
             {notes.map((n, i) => (
               <NoteCard key={n.id} note={n} index={i} onOpen={onOpenNote} />
             ))}

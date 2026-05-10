@@ -44,7 +44,7 @@ export function NoteCard({
         }
       }}
       aria-label={onOpen ? `open wish from ${author}` : undefined}
-      className={`paper relative rounded-2xl shadow-card overflow-hidden ${onOpen ? "cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-rose/40" : ""}`}
+      className={`paper relative rounded-2xl shadow-card overflow-hidden h-80 flex flex-col ${onOpen ? "cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-rose/40" : ""}`}
       style={{
         background: c.bg,
         color: c.ink,
@@ -55,9 +55,9 @@ export function NoteCard({
       <span className="pin pointer-events-none" />
 
       {note.kind === "image" && note.image_url ? (
-        <div className="p-4 pt-7">
+        <div className="flex-1 flex flex-col min-h-0 px-3 pt-7 pb-2">
           <div
-            className="rounded-xl overflow-hidden border-[1.5px]"
+            className="flex-1 rounded-xl overflow-hidden border-[1.5px] min-h-0"
             style={{ borderColor: `${c.tape}55`, background: "#fff" }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -66,12 +66,12 @@ export function NoteCard({
               alt={`a doodle from ${author}`}
               loading="lazy"
               draggable={false}
-              className="w-full h-auto block pointer-events-none select-none"
+              className="w-full h-full object-cover block pointer-events-none select-none"
             />
           </div>
           {note.message && (
             <p
-              className="font-body text-base mt-3 leading-relaxed whitespace-pre-wrap break-words"
+              className="font-body text-sm mt-2 leading-snug line-clamp-2"
               style={{ color: c.ink }}
             >
               {note.message}
@@ -79,22 +79,27 @@ export function NoteCard({
           )}
         </div>
       ) : (
-        <div className="px-6 py-7 pt-9">
+        <div className="relative flex-1 px-6 py-7 pt-9 min-h-0 overflow-hidden">
           <p
-            className="font-body text-lg leading-relaxed whitespace-pre-wrap break-words"
+            className="font-body text-base leading-relaxed line-clamp-6 break-words"
             style={{ color: c.ink }}
           >
             {note.message}
           </p>
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-10"
+            style={{ background: `linear-gradient(180deg, ${c.bg}00 0%, ${c.bg} 100%)` }}
+          />
         </div>
       )}
 
-      <div className="px-5 pb-4 pt-2 flex items-center justify-between">
-        <div className="flex items-center gap-1.5 font-body text-sm font-semibold" style={{ color: c.ink, opacity: 0.85 }}>
+      <div className="px-5 pb-4 pt-2 flex items-center justify-between shrink-0">
+        <div className="flex items-center gap-1.5 font-body text-sm font-semibold truncate" style={{ color: c.ink, opacity: 0.85 }}>
           <HeartDoodle size={14} color={c.tape} />
-          <span>— {author}</span>
+          <span className="truncate">— {author}</span>
         </div>
-        <div className="pixel-label" style={{ color: c.ink, opacity: 0.65 }}>
+        <div className="pixel-label shrink-0" style={{ color: c.ink, opacity: 0.65 }}>
           {formatDate(note.created_at)}
         </div>
       </div>
