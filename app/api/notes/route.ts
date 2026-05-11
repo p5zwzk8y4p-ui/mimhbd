@@ -16,7 +16,7 @@ export async function GET() {
   const { data, error } = await sb
     .from("notes")
     .select(PUBLIC_COLS)
-    .order("created_at", { ascending: false })
+    .order("created_at", { ascending: true })
     .limit(1000);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 

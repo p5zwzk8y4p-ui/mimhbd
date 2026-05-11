@@ -44,7 +44,7 @@ export function Highlights({ notes }: { notes: Note[] }) {
   const digital = notes.filter((n) => n.kind === "digital").length;
   const anon = notes.filter((n) => n.is_anon).length;
 
-  const latest = notes[0];
+  const latest = notes[notes.length - 1];
   const latestName = latest
     ? latest.is_anon
       ? "a secret friend"
